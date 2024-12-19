@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
+func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan int) {
 	for i := 0; i <= 10; i += 2 {
 		<-even
 		evenInt <- i
@@ -10,7 +10,7 @@ func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool
 	}
 }
 
-func PrintOdd(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
+func PrintOdd(even chan bool, odd chan bool, evenInt chan int, oddInt chan int) {
 	for i := 1; i <= 10; i += 2 {
 		<-odd
 		oddInt <- i
@@ -24,7 +24,7 @@ func main() {
 	evenInt := make(chan int)
 	oddInt := make(chan int)
 
-	go PrintEven()
+	go PrintEven(even, odd, evenInt, oddInt)
 	go PrintOdd()
 
 	for i := 0; i <= 10; i++ {
