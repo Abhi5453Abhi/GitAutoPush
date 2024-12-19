@@ -33,7 +33,7 @@ func PrintPong(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGrou
 	for {
 		select {
 		case <-pong:
-			fmt.Println("Ping")
+			fmt.Println("Pong")
 			ping <- true
 		case <-done:
 			return
@@ -57,7 +57,7 @@ func main() {
 
 	}
 
-	wg.Wait()
 	close(done)
+	wg.Wait()
 
 }
