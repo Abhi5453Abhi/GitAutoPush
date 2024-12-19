@@ -37,6 +37,7 @@ func main() {
 	// Start the printing process
 	even <- true // Trigger the even goroutine
 	wg.Wait()    // Wait for all goroutines to finish
+	<-odd
 
 	// End of main function
 	fmt.Println()
