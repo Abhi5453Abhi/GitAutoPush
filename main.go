@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
@@ -13,6 +12,7 @@ func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
 		fmt.Println(i)
 		odd <- true
 	}
+	close(even)
 }
 
 func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
@@ -34,10 +34,6 @@ func main() {
 	go PrintOdd(even, odd, &wg)
 
 	even <- true
-	time.Sleep(time.Second)
-	go func() {
-		wg.Wait()
-		close(even)
-	}()
+	wg.Wait()
 
 }
