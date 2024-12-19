@@ -27,6 +27,15 @@ func PrintPong(ping chan bool, pong chan bool, done chan bool) {
 	// 	fmt.Println("Pong")
 	// 	ping <- true
 	// }
+	for {
+		select {
+		case <-pong:
+			fmt.Println("Ping")
+			ping <- true
+		case <-done:
+			return
+		}
+	}
 }
 
 func main() {
