@@ -20,4 +20,15 @@ func main() {
 			pong <- true
 		}
 	}()
+	go func() {
+		defer wg.Done()
+		for i := 0; i < 10; i++ {
+			<-pong
+			fmt.Println("Pong")
+			ping <- true
+		}
+	}()
+	ping <- true
+	wg.Wait()
+
 }
