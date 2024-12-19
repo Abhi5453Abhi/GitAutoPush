@@ -4,18 +4,20 @@ import "fmt"
 
 func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan int) {
 	for i := 0; i <= 10; i += 2 {
-		<-even
-		evenInt <- i
-		odd <- true
+		<-even       // Wait for permission to print even
+		evenInt <- i // Send even number to the evenInt channel
+		odd <- true  // Notify that the odd goroutine can print
 	}
+	close(evenInt) // Close evenInt channel after finishing
 }
 
 func PrintOdd(even chan bool, odd chan bool, evenInt chan int, oddInt chan int) {
 	for i := 1; i <= 10; i += 2 {
-		<-odd
-		oddInt <- i
-		odd <- true
+		<-odd        // Wait for permission to print odd
+		oddInt <- i  // Send odd number to the oddInt channel
+		even <- true // Notify that the even goroutine can print
 	}
+	close(oddInt) // Close oddInt channel after finishing
 }
 
 func main() {
@@ -27,17 +29,24 @@ func main() {
 	go PrintEven(even, odd, evenInt, oddInt)
 	go PrintOdd(even, odd, evenInt, oddInt)
 
-	for i := 0; i <= 10; i++ {
+	// Start by allowing the even goroutine to print first
+	even <- true
+
+	// Print the numbers in order
+	for {
 		select {
-		case val1, ok := <-even:
+		case evenNum, ok := <-evenInt:
 			if ok {
-				fmt.Println(val1)
+				fmt.Print(evenNum)
 			}
-		case val2, ok := <-odd:
+		case oddNum, ok := <-oddInt:
 			if ok {
-				fmt.Println(val2)
+				fmt.Print(oddNum)
 			}
 		}
+		// Exit condition when both channels are closed
+		if len(evenInt) == 0 && len(oddInt) == 0 {
+			break
+		}
 	}
-	even <- true
 }
