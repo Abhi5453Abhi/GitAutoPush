@@ -8,11 +8,8 @@ import (
 func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
-		select{
-			cas
-		}
-		_, ok := <-ping
-		if ok {
+		select {
+		case <-ping:
 			fmt.Println("ping")
 			pong <- true
 		}
