@@ -30,8 +30,10 @@ func main() {
 			if ma[string(str[j])] >= 1 {
 				break
 			}
-			ma[string(s)]
+			ma[string(str[i])] = 0
+			i++
 		}
+		ma[s]
 	}
 
 	fmt.Println(ans)
