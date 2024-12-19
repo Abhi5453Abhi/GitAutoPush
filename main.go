@@ -2,11 +2,7 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"strconv"
 	"sync"
-
-	"github.com/gin-gonic/gin"
 )
 
 func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
@@ -30,6 +26,13 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 	}
 }
 
+func Divide(a, b int) error {
+	dividend := a % b
+	if dividend == 0 {
+		return Error.new("Divisior is 0")
+	}
+}
+
 func main() {
 	// ping := make(chan bool, 2)
 	// pong := make(chan bool, 2)
@@ -42,18 +45,5 @@ func main() {
 
 	// ping <- true
 	// wg.Wait()
-
-	r := gin.Default()
-
-	r.GET("/:id", func(ctx *gin.Context) {
-		id := ctx.Param("id")
-		newId, _ := strconv.Atoi(id)
-		ctx.JSON(http.StatusAccepted, gin.H{
-			"id":      newId,
-			"Message": "Successfull",
-		})
-	})
-
-	r.Run(":3000")
 
 }
