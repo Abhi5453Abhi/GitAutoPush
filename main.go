@@ -25,7 +25,6 @@ func main() {
 	wg.Add(1)
 	go getNumbers(ch, &wg)
 	wg.Wait()
-	close(ch)
 
 	PrintSquares(ch)
 }
