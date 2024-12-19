@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-func getNumbers(ch chan int) {
+func getNumbers(ch chan int, wg *s) {
 	for i := 1; i <= 10; i++ {
 		ch <- i
 	}
@@ -16,10 +19,12 @@ func PrintSquares(ch chan int) {
 }
 
 func main() {
-	wg := s
+	wg := sync.WaitGroup{}
 	ch := make(chan int)
 
-	go getNumbers(ch)
+	wg.Add(1)
+	go getNumbers(ch, &wg)
+	wg.Wait()
 
 	PrintSquares(ch)
 }
