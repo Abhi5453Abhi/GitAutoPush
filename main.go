@@ -22,14 +22,15 @@ func main() {
 	//a -> 1
 
 	i := 0
-	j := 0
+	j := 1
 
 	for j < len(str) {
 		ma[string(str[i])]++
 		for {
-			if ma[sstr[j]] {
+			if ma[string(str[j])] >= 1 {
 				break
 			}
+			ma[string(s)]
 		}
 	}
 
