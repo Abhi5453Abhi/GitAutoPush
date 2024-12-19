@@ -16,7 +16,7 @@ package main
 import "fmt"
 
 func main() {
-	str := "bbbb"
+	str := "abcs"
 	ans := min(1, len(str))
 	ma := make(map[string]int)
 	//a -> 1
