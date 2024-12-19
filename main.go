@@ -16,7 +16,7 @@ package main
 import "fmt"
 
 func main() {
-	str := "abcs"
+	str := "abcabcc"
 	ans := min(1, len(str))
 	ma := make(map[string]int)
 	//a -> 1
@@ -29,6 +29,8 @@ func main() {
 			if ma[string(str[j])] == 0 {
 				break
 			}
+			//abcd
+			//123
 			ma[string(str[i])] = 0
 			i++
 		}
