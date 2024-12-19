@@ -22,6 +22,7 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	ch := make(chan int)
+	done := make(chan bool)
 	// odd := make(chan bool)
 
 	wg.Add(2)
