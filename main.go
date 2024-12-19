@@ -23,7 +23,9 @@ func main() {
 	i := 0
 	j := 0
 
-	for ; j < len(s)
+	for j < len(str) {
+		ma[sstr[i]]++
+	}
 
 	fmt.Println(ans)
 }
