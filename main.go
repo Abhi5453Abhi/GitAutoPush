@@ -1,13 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"sync"
 )
 
 func PrintEven(ch chan int, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
+		select {
+			cas
+		}
 		ch <- i
 	}
 }
@@ -29,15 +31,15 @@ func main() {
 	wg.Add(2)
 	go PrintEven(ch, done, &wg)
 	go PrintOdd(ch, done, &wg)
-	for {
-		select {
-		case <-done:
-			break
-		case <-ch:
-			fmt.Println(ch)
-		}
-	}
-	wg.Wait()
+	// for {
+	// 	select {
+	// 	case <-done:
+	// 		break
+	// 	case <-ch:
+	// 		fmt.Println(ch)
+	// 	}
+	// }
 	close(done)
+	wg.Wait()
 
 }
