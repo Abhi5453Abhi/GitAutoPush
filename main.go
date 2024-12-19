@@ -24,10 +24,13 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 	for i := 0; i <= 10; i += 2 {
 		<-pong
 		fmt.Println("pong")
-		ping <- true
+		if i == 10 {
+			fmt.Println("Ping Closed")
+			close(ping)
+		} else {
+			ping <- true
+		}
 	}
-	fmt.Println("Ping Closed")
-	close(ping)
 }
 
 func main() {
