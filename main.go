@@ -1,42 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"sync"
+	"context"
+	"time"
 )
 
-func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for i := 0; i <= 10; i += 2 {
-		<-even
-		fmt.Println(i)
-		if i == 10 {
-			close(odd)
-			return
-		}
-		odd <- true
-	}
-}
-
-func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for i := 1; i <= 10; i += 2 {
-		<-odd
-		fmt.Println(i)
-		even <- true
-	}
+func thirdPartyApi(ctx context.Context) error {
+	time.Sleep(400 * time.Millisecond)
+	return nil
 }
 
 func main() {
-	even := make(chan bool)
-	odd := make(chan bool)
-	wg := sync.WaitGroup{}
+	ctx := context.Background()
+	ctxWithTo := ctx.contextWithTimeOut(ctx, 200*time.Millisecond)
 
-	wg.Add(2)
-	go PrintEven(even, odd, &wg)
-	go PrintOdd(even, odd, &wg)
-
-	even <- true
-	wg.Wait()
-
+	err := thirdPartyApi(ctx)
 }
