@@ -13,6 +13,15 @@ func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 	}
 }
 
+func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
+	for i := 0; i <= 10; i += 2 {
+		<-pong
+		fmt.Println("pong")
+		ping <- true
+	}
+	close(ping)
+}
+
 func main() {
 	ping := make(chan bool)
 	pong := make(chan bool)
