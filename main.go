@@ -18,11 +18,12 @@ import "fmt"
 func main() {
 	str := "abcabcc"
 	ans := min(1, len(str))
-	map[s]
+	ma := make(map[string]int)
 
 	i := 0
 	j := 0
 
+	for ; j < len(s)
 
 	fmt.Println(ans)
 }
