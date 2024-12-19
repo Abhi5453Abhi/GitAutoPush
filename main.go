@@ -7,11 +7,6 @@ import (
 
 func PrintPing(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
-	// for i := 0; i < 10; i++ {
-	// 	<-ping
-	// 	fmt.Println("Ping")
-	// 	pong <- true
-	// }
 	for {
 		select {
 		case <-ping:
@@ -25,11 +20,6 @@ func PrintPing(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGrou
 
 func PrintPong(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
-	// for i := 0; i < 10; i++ {
-	// 	<-pong
-	// 	fmt.Println("Pong")
-	// 	ping <- true
-	// }
 	for {
 		select {
 		case <-pong:
@@ -44,20 +34,25 @@ func PrintPong(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGrou
 func main() {
 	wg := sync.WaitGroup{}
 
-	ping := make(chan bool, 10)
-	pong := make(chan bool, 10)
+	ping := make(chan bool, 1) // Buffer of 1 is enough
+	pong := make(chan bool, 1)
 	done := make(chan bool)
 
 	wg.Add(2)
 	go PrintPing(ping, pong, done, &wg)
 	go PrintPong(ping, pong, done, &wg)
+
+	// Start the ping-pong sequence
 	ping <- true
 
-	for i := 0; i <= 10; i++ {
-
+	// Allow 10 iterations
+	for i := 0; i < 10; i++ {
+		// Let the ping-pong goroutines handle the work
 	}
 
+	// Signal the goroutines to stop
 	close(done)
-	wg.Wait()
 
+	// Wait for the goroutines to finish
+	wg.Wait()
 }
