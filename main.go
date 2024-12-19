@@ -12,11 +12,11 @@ func thirdPartyApi(ctx context.Context) error {
 }
 
 func main() {
-	ctx := context.Background()
-	ctxWithTo, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
+	// ctx := context.Background()
+	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 
-	err := thirdPartyApi(ctxWithTo)
+	err := thirdPartyApi(ctx)
 
 	if err != nil {
 		fmt.Println(err)
