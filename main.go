@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"sync"
+
+	"github.com/gin-gonic/gin"
 )
 
 func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
@@ -38,4 +40,7 @@ func main() {
 
 	// ping <- true
 	// wg.Wait()
+
+	r := gin.Default()
+
 }
