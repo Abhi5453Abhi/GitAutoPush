@@ -24,5 +24,8 @@ func main() {
 
 	fmt.Println("Name: ", parsedData.Name)
 	fmt.Println("Age: ", parsedData.Age)
+	for i := range parsedData.Skills {
+		fmt.Println("Skill: ", parsedData.Skills[i])
+	}
 
 }
