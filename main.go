@@ -6,39 +6,36 @@ import (
 )
 
 func main() {
-	// Create channels for communication
 	even := make(chan bool)
 	odd := make(chan bool)
 	var wg sync.WaitGroup
 
-	// Add 2 to WaitGroup for the two goroutines
 	wg.Add(2)
 
-	// Launch a goroutine to print even numbers
+	// Even goroutine
 	go func() {
-		defer wg.Done() // Mark this goroutine as done when finished
+		defer wg.Done()
 		for i := 0; i <= 10; i += 2 {
-			<-even // Wait for signal from main routine or odd goroutine
+			<-even // Wait for signal
 			fmt.Print(i)
-			odd <- true // Signal the odd goroutine
+			if i < 10 {
+				odd <- true // Signal the odd goroutine
+			}
 		}
 	}()
 
-	// Launch a goroutine to print odd numbers
+	// Odd goroutine
 	go func() {
-		defer wg.Done() // Mark this goroutine as done when finished
-		for i := 1; i <= 10; i += 2 {
-			<-odd // Wait for signal from the even goroutine
+		defer wg.Done()
+		for i := 1; i <= 9; i += 2 {
+			<-odd // Wait for signal
 			fmt.Print(i)
 			even <- true // Signal the even goroutine
 		}
 	}()
 
-	// Start the printing process
+	// Start the process
 	even <- true // Trigger the even goroutine
-	wg.Wait()    // Wait for all goroutines to finish
-	<-odd
-
-	// End of main function
+	wg.Wait()    // Wait for both goroutines to complete
 	fmt.Println()
 }
