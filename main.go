@@ -1,40 +1,31 @@
 package main
 
 import (
-	"fmt"
 	"sync"
 )
 
-func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+func PrintEven(ch chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
-		<-even
-		fmt.Println(i)
-		odd <- true
+		ch <- i
 	}
 }
 
-func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+func PrintOdd(ch chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 1; i <= 10; i += 2 {
-		<-odd
-		fmt.Println(i)
-		even <- true
+		ch <- i
 	}
 }
 
 func main() {
 	wg := sync.WaitGroup{}
 
-	even := make(chan bool)
-	odd := make(chan bool)
+	ch := make(chan int)
+	// odd := make(chan bool)
 
 	wg.Add(2)
-	go PrintEven(even, odd, &wg)
-	go PrintOdd(even, odd, &wg)
+	go PrintEven(ch, &wg)
+	go PrintOdd(ch, &wg)
 
-	even <- true
-	wg.Wait()
-	close(even)
-	close(odd)
 }
