@@ -15,12 +15,17 @@ package main
 
 func main() {
 	str := "abcabcbb"
+	ans := 0
 
 	for i, ch := range str {
 		ma := make(map[string]int)
 		ma[string(ch)]++
 		for j := i + 1; j < len(str); j++ {
-			val, ok := ma[sstr[j]]
+			_, ok := ma[string(str[j])]
+			if ok {
+				ans
+				break
+			}
 		}
 	}
 
