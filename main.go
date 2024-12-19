@@ -1,9 +1,26 @@
 package main
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
-func PrintEven(even chan bool, odd chan bool, wg *s) {
+func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 0; i <= 10; i += 2 {
+		<-even
+		fmt.Println(i)
+		odd <- true
+	}
+}
 
+func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 1; i <= 10; i += 2 {
+		<-odd
+		fmt.Println(i)
+		even <- true
+	}
 }
 
 func main() {
