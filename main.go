@@ -39,6 +39,7 @@ func main() {
 
 	}
 
-	wg.Wait()
+	// wg.Wait()
+	close(done)
 
 }
