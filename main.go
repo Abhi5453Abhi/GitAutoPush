@@ -29,10 +29,14 @@ func main() {
 
 	for i := 0; i <= 10; i++ {
 		select {
-		case val1, ok <-even:
-			fmt.Println(val1)
-		case val2, ok <-odd:
-			fmt.Println(val2)
+		case val1, ok := <-even:
+			if ok {
+				fmt.Println(val1)
+			}
+		case val2, ok := <-odd:
+			if ok {
+				fmt.Println(val2)
+			}
 		}
 	}
 	even <- true
