@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	interval := time.Second * 20 // Set the interval to 20 secondss
+	interval := time.Second * 30 // Set the interval to 20 secondss
 
 	for {
 		fmt.Println("Starting auto-push process...")
