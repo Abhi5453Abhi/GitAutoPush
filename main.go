@@ -1,33 +1,11 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
-
-func getNumbers(ch chan int, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for i := 1; i <= 10; i++ {
-		ch <- i
-	}
-}
-
-func PrintSquares(ch chan int) {
-	for i := range ch {
-		fmt.Println(i * i)
-	}
-}
-
 func main() {
-	wg := sync.WaitGroup{}
-	ch := make(chan int)
+	even := make(chan bool, 10)
+	odd := make(chan bool, 10)
+	wg := s
 
-	wg.Add(1)
-	go getNumbers(ch, &wg)
-	go func() {
-		wg.Wait()
-		close(ch)
-	}()
+	go PrintEven()
+	go PrintOdd()
 
-	PrintSquares(ch)
 }
