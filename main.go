@@ -26,9 +26,6 @@ func main() {
 
 	for j < len(str) {
 		for ma[string(str[j])] == 1 {
-			// if  {
-			// 	break
-			// }
 			ma[string(str[i])] = 0
 			i++
 		}
