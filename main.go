@@ -1,8 +1,19 @@
 package main
 
-func main() {
-	ping := make(chan bool)
-	pong := make(chan bool)
+import "sync"
 
-	wg := s
+func PrintPing(ping chan bool, pong chan bool, wg *s)
+
+func main() {
+	ping := make(chan bool, 2)
+	pong := make(chan bool, 2)
+
+	wg := sync.WaitGroup{}
+
+	wg.Add(2)
+	go PrintPing()
+	go PrintPong()
+
+	ping <- true
+	wg.Wait()
 }
