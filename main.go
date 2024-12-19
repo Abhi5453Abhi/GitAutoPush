@@ -1,5 +1,9 @@
 package main
 
+type ParsedData struct {
+	name s
+}
+
 func main() {
 	data := `{
 		"name": "Alice",
@@ -7,4 +11,5 @@ func main() {
 		"skills": ["Golang", "Docker", "Kubernetes"]
 	  }
 	  `
+
 }
