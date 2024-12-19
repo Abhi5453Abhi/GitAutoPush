@@ -1,5 +1,7 @@
 package main
 
+import "encoding/json"
+
 type ParsedData struct {
 	name   string
 	age    int
@@ -7,7 +9,7 @@ type ParsedData struct {
 }
 
 func main() {
-	var pars
+	var parsedData ParsedData
 	data := `{
 		"name": "Alice",
 		"age": 30,
@@ -15,6 +17,6 @@ func main() {
 	  }
 	  `
 
-	parsedData
+	json.NewDecoder(data).Decode(&parsedData)
 
 }
