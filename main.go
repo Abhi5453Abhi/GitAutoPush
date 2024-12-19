@@ -16,7 +16,7 @@ package main
 import "fmt"
 
 func main() {
-	str := "abcabcc"
+	str := "bbbb"
 	ans := min(1, len(str))
 	ma := make(map[string]int)
 	//a -> 1
@@ -34,6 +34,7 @@ func main() {
 		}
 		ma[string(str[i])] = 1
 		ans = max(ans, j-i+1)
+		j++
 	}
 	fmt.Println(ans)
 }
