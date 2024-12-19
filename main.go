@@ -29,7 +29,7 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 func Divide(a, b int) error {
 	dividend := a % b
 	if dividend == 0 {
-		return Error("Divisor is 0")
+		return fmt.Errorf("Divis")
 	}
 }
 
