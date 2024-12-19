@@ -27,7 +27,9 @@ func main() {
 	for j < len(str) {
 		ma[string(str[i])]++
 		for {
-			if(ma[s])
+			if ma[sstr[j]] {
+				break
+			}
 		}
 	}
 
