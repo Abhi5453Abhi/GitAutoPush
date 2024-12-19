@@ -25,8 +25,9 @@ func thirdPartyApi(ctx context.Context) {
 
 	select {
 	case <-done:
-		fmt.Println("Work is")
-
+		fmt.Println("Work is done")
+	case <-ctxWithTo.Deadline():
+		fmt.Println("Deadline exceeded")
 	}
 
 }
