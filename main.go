@@ -13,6 +13,8 @@ Output: 1
 
 package main
 
+import "fmt"
+
 func main() {
 	str := "abcabcbb"
 	ans := 0
@@ -20,13 +22,15 @@ func main() {
 	for i, ch := range str {
 		ma := make(map[string]int)
 		ma[string(ch)]++
+		fmt.Println("i: ", s)
 		for j := i + 1; j < len(str); j++ {
 			_, ok := ma[string(str[j])]
 			if ok {
-				ans
+				ans = max(ans, j-i)
 				break
 			}
 		}
 	}
+	fmt.Println(ans)
 
 }
