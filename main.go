@@ -17,7 +17,9 @@ func main() {
 	str := "abcabcbb"
 	ma := make(map[string]int)
 
-	for i := range s
+	for i, ch := range str {
+		for j := i+1 ; j < len(s)
+	}
 
 
 }
