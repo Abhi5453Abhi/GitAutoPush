@@ -32,6 +32,7 @@ func main() {
 			fmt.Print(i)
 			even <- true // Signal the even goroutine
 		}
+		clos
 	}()
 
 	// Start the process
