@@ -8,7 +8,9 @@ func PrintPing(ping chan bool, pong chan bool, done chan bool) {
 	// 	pong <- true
 	// }
 	for {
-		s
+		select{
+			cas
+		}
 	}
 }
 
