@@ -14,5 +14,10 @@ Output: 1
 package main
 
 func main() {
-	st
+	str := "abcabcbb"
+	ma := make(map[string]int)
+
+	for i := range s
+
+
 }
