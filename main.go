@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 )
 
@@ -12,7 +13,12 @@ func thirdPartyApi(ctx context.Context) error {
 
 func main() {
 	ctx := context.Background()
-	ctxWithTo := ctx.contextWithTimeOut(ctx, 200*time.Millisecond)
+	ctxWithTo, cancel := ctx.contextWithTimeOut(ctx, 200*time.Millisecond)
+	defer cancel()
 
-	err := thirdPartyApi(ctx)
+	err := thirdPartyApi(ctxWithTo)
+
+	if err != nil {
+		fmt.Println(err)
+	}
 }
