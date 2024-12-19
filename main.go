@@ -44,8 +44,10 @@ func main() {
 
 	r := gin.Default()
 
-	r.GET("/", func(ctx *gin.Context) {
+	r.GET("/:id", func(ctx *gin.Context) {
+		id := ctx.Param("id")
 		ctx.JSON(http.StatusAccepted, gin.H{
+			"id":      id,
 			"Message": "Successfull",
 		})
 	})
