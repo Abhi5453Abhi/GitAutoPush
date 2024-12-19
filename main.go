@@ -25,12 +25,10 @@ func main() {
 	j := 0
 
 	for j < len(str) {
-		for {
-			if ma[string(str[j])] == 0 {
-				break
-			}
-			//abcd
-			//123
+		for ma[string(str[j])] == 0 {
+			// if  {
+			// 	break
+			// }
 			ma[string(str[i])] = 0
 			i++
 		}
