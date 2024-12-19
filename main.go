@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -26,15 +27,17 @@ func main() {
 	// odd := make(chan bool)
 
 	wg.Add(2)
-	i := 0
+	go PrintEven(ch, done, &wg)
+	go PrintOdd(ch, done, &wg)
 	for {
 		select {
 		case <-done:
 			break
-			cas
+		case <-ch:
+			fmt.Println(ch)
 		}
 	}
-	// go PrintEven(ch, done, &wg)
-	// go PrintOdd(ch, done, &wg)
+	wg.Wait()
+	close(done)
 
 }
