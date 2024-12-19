@@ -2,6 +2,10 @@ package main
 
 import "sync"
 
+func PrintEven(even chan bool, odd chan bool, wg *s) {
+
+}
+
 func main() {
 	wg := sync.WaitGroup{}
 
