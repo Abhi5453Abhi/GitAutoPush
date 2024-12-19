@@ -13,7 +13,7 @@ func main() {
 }
 
 func thirdPartyApi(ctx context.Context) {
-	ctxWithTo, cancel := context.WithTimeout(ctx, 2*time.Second)
+	ctxWithTo, cancel := context.WithTimeout(ctx, 4*time.Second)
 	defer cancel()
 
 	done := make(chan bool)
@@ -26,7 +26,7 @@ func thirdPartyApi(ctx context.Context) {
 	select {
 	case <-done:
 		fmt.Println("Work is done")
-	case <-ctxWithTo.Deadline():
+	case <-ctxWithTo.Done():
 		fmt.Println("Deadline exceeded")
 	}
 
