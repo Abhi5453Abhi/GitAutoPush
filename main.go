@@ -15,11 +15,13 @@ package main
 
 func main() {
 	str := "abcabcbb"
-	ma := make(map[string]int)
 
 	for i, ch := range str {
-		for j := i+1 ; j < len(s)
-	}
+		ma := make(map[string]int)
+		ma[sch]++
+		for j := i + 1; j < len(str); j++ {
 
+		}
+	}
 
 }
