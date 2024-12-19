@@ -18,10 +18,11 @@ func main() {
 		for i := 0; i <= 10; i += 2 {
 			<-even // Wait for signal
 			fmt.Print(i)
-			if i < 10 {
-				odd <- true // Signal the odd goroutine
-			}
+			// if i < 10 {
+			odd <- true // Signal the odd goroutine
+			// }
 		}
+		close(odd)
 	}()
 
 	// Odd goroutine
@@ -32,7 +33,7 @@ func main() {
 			fmt.Print(i)
 			even <- true // Signal the even goroutine
 		}
-		clos
+		close(even)
 	}()
 
 	// Start the process
