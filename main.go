@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func PrintPing(ping chan bool, pong chan bool, done chan bool) {
 	// defer wg.Done()
 	// for i := 0; i < 10; i++ {
@@ -8,8 +10,12 @@ func PrintPing(ping chan bool, pong chan bool, done chan bool) {
 	// 	pong <- true
 	// }
 	for {
-		select{
-			cas
+		select {
+		case <-ping:
+			fmt.Println("Ping")
+			pong <- true
+		case <-done:
+			return
 		}
 	}
 }
