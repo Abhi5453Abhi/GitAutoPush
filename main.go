@@ -13,7 +13,7 @@ func thirdPartyApi(ctx context.Context) error {
 
 func main() {
 	ctx := context.Background()
-	ctxWithTo, cancel := ctx.contextWithTimeOut(ctx, 200*time.Millisecond)
+	ctxWithTo, cancel := context.WithTimeout(ctx, 200*time.Millisecond)
 	defer cancel()
 
 	err := thirdPartyApi(ctxWithTo)
