@@ -25,10 +25,10 @@ func main() {
 	j := 0
 
 	for j < len(str) {
-		for ma[string(str[j])] >= 1 {
-			// if ma[string(str[j])] >= 1 {
-			// 	break
-			// }
+		for {
+			if ma[string(str[j])] == 0 {
+				break
+			}
 			ma[string(str[i])] = 0
 			i++
 		}
