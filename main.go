@@ -24,8 +24,8 @@ func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
 }
 
 func main() {
-	even := make(chan bool, 10)
-	odd := make(chan bool, 10)
+	even := make(chan bool)
+	odd := make(chan bool)
 	wg := sync.WaitGroup{}
 
 	wg.Add(2)
@@ -33,6 +33,9 @@ func main() {
 	go PrintOdd(even, odd, &wg)
 
 	even <- true
-	wg.Wait()
+	go func() {
+		wg.Wait()
+		close(even)
+	}()
 
 }
