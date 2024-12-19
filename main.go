@@ -8,8 +8,8 @@ import (
 func main() {
 	wg := sync.WaitGroup{}
 
-	ping := make(chan bool)
-	pong := make(chan bool)
+	ping := make(chan bool, 10)
+	pong := make(chan bool, 10)
 
 	wg.Add(2)
 	go func() {
