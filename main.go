@@ -13,6 +13,7 @@ func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 			fmt.Println("ping")
 			pong <- true
 		} else {
+			fmt.Println("Pong Closed")
 			close(pong)
 		}
 	}
@@ -25,6 +26,7 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 		fmt.Println("pong")
 		ping <- true
 	}
+	fmt.Println("Ping Closed")
 	close(ping)
 }
 
