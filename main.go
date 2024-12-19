@@ -2,27 +2,31 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 )
 
-func thirdPartyApi(ctx context.Context) error {
-	time.Sleep(400 * time.Millisecond)
-	if ctx.Err() == context.DeadlineExceeded {
-		return errors.New("TLE")
-	}
-	return nil
+func main() {
+	ctx := context.Background()
+
+	thirdPartyApi(ctx)
 }
 
-func main() {
-	// ctx := context.Background()
-	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+func thirdPartyApi(ctx context.Context) {
+	ctxWithTo, cancel := context.WithTimeout(ctx, 2*time.Second)
 	defer cancel()
 
-	err := thirdPartyApi(ctx)
+	done := make(chan bool)
 
-	if err != nil {
-		fmt.Println(err)
+	go func() {
+		time.Sleep(3 * time.Second)
+		done <- true
+	}()
+
+	select {
+	case <-done:
+		fmt.Println("Work is")
+
 	}
+
 }
