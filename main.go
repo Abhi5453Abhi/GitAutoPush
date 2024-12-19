@@ -20,7 +20,7 @@ func main() {
 	  }
 	  `
 
-	json.Unmarshal([]byte(data), parsedData)
+	json.Unmarshal([]byte(data), &parsedData)
 
 	fmt.Println("Name: ", parsedData.Name)
 	fmt.Println("Age: ", parsedData.Age)
