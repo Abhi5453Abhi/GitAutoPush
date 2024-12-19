@@ -27,9 +27,11 @@ func main() {
 
 	wg.Add(2)
 	for {
-		s
+		select{
+			cas
+		}
 	}
-	go PrintEven(ch, done, &wg)
-	go PrintOdd(ch, done, &wg)
+	// go PrintEven(ch, done, &wg)
+	// go PrintOdd(ch, done, &wg)
 
 }
