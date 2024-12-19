@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"sync"
 
 	"github.com/gin-gonic/gin"
@@ -46,7 +47,7 @@ func main() {
 
 	r.GET("/:id", func(ctx *gin.Context) {
 		id := ctx.Param("id")
-		newId := s
+		newId, err := strconv.Atoi(id)
 		ctx.JSON(http.StatusAccepted, gin.H{
 			"id":      id,
 			"Message": "Successfull",
