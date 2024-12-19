@@ -12,7 +12,7 @@ func main() {
 	for {
 		fmt.Println("Starting auto-push process...")
 
-		// Step 1: Stage all changes
+		// Step 1: Stage all changess
 		err := runCommand("git", "add", ".")
 		if err != nil {
 			fmt.Println("Error staging files:", err)
