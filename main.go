@@ -6,6 +6,7 @@ import (
 )
 
 func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
 		_, ok := <-ping
 		if ok {
@@ -18,6 +19,7 @@ func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 }
 
 func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
 		<-pong
 		fmt.Println("pong")
@@ -27,8 +29,8 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 }
 
 func main() {
-	ping := make(chan bool, 2)
-	pong := make(chan bool, 2)
+	ping := make(chan bool)
+	pong := make(chan bool)
 
 	wg := sync.WaitGroup{}
 
