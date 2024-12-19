@@ -25,7 +25,6 @@ func main() {
 	j := 1
 
 	for j < len(str) {
-		ma[string(str[i])]++
 		for {
 			if ma[string(str[j])] >= 1 {
 				break
@@ -33,7 +32,8 @@ func main() {
 			ma[string(str[i])] = 0
 			i++
 		}
-		ma[s]
+		ma[string(str[i])] = 1
+		ans = max(ans)
 	}
 
 	fmt.Println(ans)
