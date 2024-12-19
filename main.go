@@ -1,37 +1,47 @@
-/**
-Problem Statement:
-
-Given a string s, find the length of the longest substring without repeating characters.
-
-Input:    s = "abcabcbb"
-Output: 3
-
-Input:    s = "bbbbb"
-Output: 1
-
-**/
-
 package main
 
-import "fmt"
+import (
+	"sync"
+)
+
+func PrintEven(ch chan int, done chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 0; i <= 10; i += 2 {
+		select {
+		case <-done:
+			return
+		default:
+			ch <- i
+		}
+	}
+}
+
+func PrintOdd(ch chan int, done chan bool, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 1; i <= 10; i += 2 {
+		ch <- i
+	}
+}
 
 func main() {
-	str := "abcabcc"
-	ans := min(1, len(str))
-	ma := make(map[string]int)
-	//a -> 1
+	wg := sync.WaitGroup{}
 
-	i := 0
-	j := 0
+	ch := make(chan int)
+	done := make(chan bool)
+	// odd := make(chan bool)
 
-	for j < len(str) {
-		for ma[string(str[j])] == 1 {
-			ma[string(str[i])] = 0
-			i++
-		}
-		ma[string(str[j])] = 1
-		ans = max(ans, j-i+1)
-		j++
-	}
-	fmt.Println(ans)
+	wg.Add(2)
+	go PrintEven(ch, done, &wg)
+	go PrintOdd(ch, done, &wg)
+	// for {
+	// 	select {
+	// 	case <-done:
+	// 		break
+	// 	case <-ch:
+	// 		fmt.Println(ch)
+	// 	}
+	// }
+	close(done)
+	wg.Wait()
+
 }
