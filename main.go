@@ -46,8 +46,10 @@ func main() {
 
 	r.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusAccepted, gin.H{
-			"Mess"
+			"Message": "Successfull",
 		})
 	})
+
+	r.Run(":3000")
 
 }
