@@ -16,19 +16,13 @@ package main
 import "fmt"
 
 func main() {
-	str := ""
+	str := "abcabcc"
 	ans := min(1, len(str))
+	map[s]
 
-	for i, ch := range str {
-		ma := make(map[string]int)
-		ma[string(ch)]++
-		for j := i + 1; j < len(str); j++ {
-			_, ok := ma[string(str[j])]
-			if ok {
-				ans = max(ans, j-i)
-				break
-			}
-		}
-	}
+	i := 0
+	j := 0
+
+
 	fmt.Println(ans)
 }
