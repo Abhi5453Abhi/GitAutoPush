@@ -7,10 +7,12 @@ import (
 func PrintEven(ch chan int, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
-		select {
-			cas
-		}
-		ch <- i
+		// select {
+		// case <-done:
+		// 	return
+		// default:
+		// 	ch <- i
+		// }
 	}
 }
 
