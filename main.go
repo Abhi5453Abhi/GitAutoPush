@@ -22,8 +22,9 @@ func main() {
 	for i, ch := range str {
 		ma := make(map[string]int)
 		ma[string(ch)]++
-		fmt.Println("i: ", s)
+		fmt.Println("i: ", string(ch))
 		for j := i + 1; j < len(str); j++ {
+			fmt.Println("j: ", string(str[j]))
 			_, ok := ma[string(str[j])]
 			if ok {
 				ans = max(ans, j-i)
