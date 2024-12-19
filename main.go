@@ -29,8 +29,9 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 func Divide(a, b int) error {
 	dividend := a % b
 	if dividend == 0 {
-		return fmt.Errorf("Divis")
+		return fmt.Errorf("Divisor is 0")
 	}
+	return nil
 }
 
 func main() {
@@ -45,5 +46,6 @@ func main() {
 
 	// ping <- true
 	// wg.Wait()
+	Divide(4, 2)
 
 }
