@@ -5,8 +5,9 @@ import (
 	"sync"
 )
 
-func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup, done chan bool) {
 	// defer wg.Done()
+	defer clos
 	for i := 0; i <= 10; i += 2 {
 		<-even // Wait for the signal to print an even number
 		fmt.Println(i)
@@ -14,7 +15,7 @@ func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
 	}
 }
 
-func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
+func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup, done chan bool) {
 	// defer wg.Done()
 	for i := 1; i <= 9; i += 2 {
 		<-odd // Wait for the signal to print an odd number
@@ -31,9 +32,10 @@ func main() {
 	done := make(chan bool)
 
 	// wg.Add(2)
-	go PrintEven(even, odd, &wg)
-	go PrintOdd(even, odd, &wg)
+	go PrintEven(even, odd, &wg, done)
+	go PrintOdd(even, odd, &wg, done)
 
 	even <- true // Start the process by signaling the even goroutine
 	// wg.Wait()    // Wait for both goroutines to complete
+	<-done
 }
