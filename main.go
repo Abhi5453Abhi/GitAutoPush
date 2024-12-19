@@ -7,12 +7,13 @@ import (
 
 func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup, done chan bool) {
 	// defer wg.Done()
-	defer close(done)
+	// defer close(done)
 	for i := 0; i <= 10; i += 2 {
 		<-even // Wait for the signal to print an even number
 		fmt.Println(i)
 		odd <- true // Signal the odd goroutine
 	}
+	done <- true
 }
 
 func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup, done chan bool) {
