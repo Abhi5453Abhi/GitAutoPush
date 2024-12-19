@@ -30,19 +30,8 @@ func main() {
 	pong := make(chan bool, 10)
 
 	wg.Add(2)
-	go PrintPing()
-	go PrintPong()
-	go func() {
-
-	}()
-	go func() {
-		defer wg.Done()
-		for i := 0; i < 10; i++ {
-			<-pong
-			fmt.Println("Pong")
-			ping <- true
-		}
-	}()
+	go PrintPing(ping, pong, &wg)
+	go PrintPong(ping, pong, &wg)
 	ping <- true
 	wg.Wait()
 
