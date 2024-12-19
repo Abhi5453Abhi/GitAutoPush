@@ -25,7 +25,7 @@ func main() {
 	oddInt := make(chan int)
 
 	go PrintEven(even, odd, evenInt, oddInt)
-	go PrintOdd()
+	go PrintOdd(even, odd, evenInt, oddInt)
 
 	for i := 0; i <= 10; i++ {
 		select {
