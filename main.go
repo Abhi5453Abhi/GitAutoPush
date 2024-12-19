@@ -10,6 +10,10 @@ func PrintEven(even chan bool, odd chan bool, wg *sync.WaitGroup) {
 	for i := 0; i <= 10; i += 2 {
 		<-even
 		fmt.Println(i)
+		if i == 10 {
+			close(odd)
+			return
+		}
 		odd <- true
 	}
 }
