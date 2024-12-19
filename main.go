@@ -17,7 +17,6 @@ func main() {
 	  }
 	  `
 
-	decoder := json.NewDecoder(data)
-	err := decoder.Decode(&parsedData)
+	json.Unmarshal([]byte(&data), parsedData)
 
 }
