@@ -1,38 +1,36 @@
 package main
 
-import (
-	"fmt"
-	"sync"
-)
-
-func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for i := 0; i < 10; i++ {
-		<-ping
-		fmt.Println("Ping")
-		pong <- true
+func PrintPing(ping chan bool, pong chan bool, done chan bool) {
+	// defer wg.Done()
+	// for i := 0; i < 10; i++ {
+	// 	<-ping
+	// 	fmt.Println("Ping")
+	// 	pong <- true
+	// }
+	for {
+		s
 	}
 }
 
-func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for i := 0; i < 10; i++ {
-		<-pong
-		fmt.Println("Pong")
-		ping <- true
-	}
+func PrintPong(ping chan bool, pong chan bool, done chan bool) {
+	// defer wg.Done()
+	// for i := 0; i < 10; i++ {
+	// 	<-pong
+	// 	fmt.Println("Pong")
+	// 	ping <- true
+	// }
 }
 
 func main() {
-	wg := sync.WaitGroup{}
+	// wg := sync.WaitGroup{}
 
 	ping := make(chan bool, 10)
 	pong := make(chan bool, 10)
 	done := make(chan bool)
 
-	wg.Add(2)
-	go PrintPing(ping, pong, &wg, done)
-	go PrintPong(ping, pong, &wg, done)
+	// wg.Add(2)
+	go PrintPing(ping, pong, done)
+	go PrintPong(ping, pong, done)
 	ping <- true
 
 	for i := 0; i <= 10; i++ {
