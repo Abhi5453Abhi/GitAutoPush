@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
-	for i := 0; i <= 10; i++ {
+	for i := 0; i <= 10; i += 2 {
 		<-even
 		evenInt <- i
 		odd <- true
@@ -11,9 +11,9 @@ func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool
 }
 
 func PrintOdd(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
-	for i := 0; i <= 10; i++ {
+	for i := 1; i <= 10; i += 2 {
 		<-odd
-		evenInt <- i
+		oddInt <- i
 		odd <- true
 	}
 }
