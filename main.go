@@ -46,6 +46,7 @@ func main() {
 
 	r.GET("/:id", func(ctx *gin.Context) {
 		id := ctx.Param("id")
+		newId := s
 		ctx.JSON(http.StatusAccepted, gin.H{
 			"id":      id,
 			"Message": "Successfull",
