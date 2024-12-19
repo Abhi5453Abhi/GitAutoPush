@@ -26,8 +26,11 @@ func main() {
 	// odd := make(chan bool)
 
 	wg.Add(2)
+	i := 0
 	for {
-		select{
+		select {
+		case <-done:
+			break
 			cas
 		}
 	}
