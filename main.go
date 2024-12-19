@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"sync"
 
 	"github.com/gin-gonic/gin"
@@ -42,5 +43,11 @@ func main() {
 	// wg.Wait()
 
 	r := gin.Default()
+
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusAccepted, gin.H{
+			"Mess"
+		})
+	})
 
 }
