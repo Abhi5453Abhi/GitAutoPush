@@ -8,6 +8,9 @@ import (
 
 func thirdPartyApi(ctx context.Context) error {
 	time.Sleep(400 * time.Millisecond)
+	if ctx.Err() == context.DeadlineExceeded {
+		return errors
+	}
 	return nil
 }
 
