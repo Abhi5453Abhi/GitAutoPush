@@ -28,11 +28,17 @@ func main() {
 
 	ping := make(chan bool, 10)
 	pong := make(chan bool, 10)
+	done := make(chan bool)
 
 	wg.Add(2)
-	go PrintPing(ping, pong, &wg)
-	go PrintPong(ping, pong, &wg)
+	go PrintPing(ping, pong, &wg, done)
+	go PrintPong(ping, pong, &wg, done)
 	ping <- true
+
+	for i := 0; i <= 10; i++ {
+
+	}
+
 	wg.Wait()
 
 }
