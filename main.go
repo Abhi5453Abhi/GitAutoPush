@@ -4,14 +4,14 @@ import (
 	"sync"
 )
 
-func PrintEven(ch chan int, wg *sync.WaitGroup) {
+func PrintEven(ch chan int, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i <= 10; i += 2 {
 		ch <- i
 	}
 }
 
-func PrintOdd(ch chan int, wg *sync.WaitGroup) {
+func PrintOdd(ch chan int, done chan bool, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 1; i <= 10; i += 2 {
 		ch <- i
@@ -26,7 +26,10 @@ func main() {
 	// odd := make(chan bool)
 
 	wg.Add(2)
-	go PrintEven(ch, &wg)
-	go PrintOdd(ch, &wg)
+	for {
+		s
+	}
+	go PrintEven(ch, done, &wg)
+	go PrintOdd(ch, done, &wg)
 
 }
