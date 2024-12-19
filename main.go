@@ -21,21 +21,21 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 
 	for i := 0; i <= 10; i++ {
 		<-pong
-		fmt.Println("Ping")
+		fmt.Println("Pong")
 		ping <- true
 	}
 }
 
 func main() {
-	ping := make(chan bool, 2)
-	pong := make(chan bool, 2)
+	// ping := make(chan bool, 2)
+	// pong := make(chan bool, 2)
 
-	wg := sync.WaitGroup{}
+	// wg := sync.WaitGroup{}
 
-	wg.Add(2)
-	go PrintPing(ping, pong, &wg)
-	go PrintPong(ping, pong, &wg)
+	// wg.Add(2)
+	// go PrintPing(ping, pong, &wg)
+	// go PrintPong(ping, pong, &wg)
 
-	ping <- true
-	wg.Wait()
+	// ping <- true
+	// wg.Wait()
 }
