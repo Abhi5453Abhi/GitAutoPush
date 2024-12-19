@@ -36,5 +36,4 @@ func main() {
 	even <- true
 	wg.Wait()
 	close(even)
-	close(odd)
 }
