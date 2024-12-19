@@ -3,9 +3,9 @@ package main
 import "encoding/json"
 
 type ParsedData struct {
-	Name   string "js"
-	Age    int
-	Skills []string
+	Name   string   `json:"name"`
+	Age    int      `json:"age"`
+	Skills []string `json:"skills"`
 }
 
 func main() {
