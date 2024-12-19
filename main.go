@@ -22,7 +22,7 @@ func main() {
 	//a -> 1
 
 	i := 0
-	j := 1
+	j := 0
 
 	for j < len(str) {
 		for ma[string(str[j])] >= 1 {
