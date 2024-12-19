@@ -48,6 +48,10 @@ func main() {
 
 	// ping <- true
 	// wg.Wait()
-	fmt.Println(Divide(4, 2))
+	err := Divide(4, 2)
+
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
 
 }
