@@ -25,14 +25,14 @@ func main() {
 	j := 0
 
 	for j < len(str) {
-		for ma[string(str[j])] == 0 {
+		for ma[string(str[j])] == 1 {
 			// if  {
 			// 	break
 			// }
 			ma[string(str[i])] = 0
 			i++
 		}
-		ma[string(str[i])] = 1
+		ma[string(str[j])] = 1
 		ans = max(ans, j-i+1)
 		j++
 	}
