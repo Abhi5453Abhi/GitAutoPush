@@ -18,9 +18,9 @@ func main() {
 
 	for i, ch := range str {
 		ma := make(map[string]int)
-		ma[sch]++
+		ma[string(ch)]++
 		for j := i + 1; j < len(str); j++ {
-
+			val, ok := ma[sstr[j]]
 		}
 	}
 
