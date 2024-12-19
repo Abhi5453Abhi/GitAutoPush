@@ -22,7 +22,7 @@ func PrintPong(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
 		select {
 		case <-pong:
 			fmt.Println("pong")
-			pong <- true
+			ping <- true
 		default:
 			fmt.Println("Ping CLOSSED")
 			close(ping)
