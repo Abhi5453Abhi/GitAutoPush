@@ -19,10 +19,6 @@ func PrintOdd(even chan bool, odd chan bool, wg *sync.WaitGroup) {
 	for i := 1; i <= 10; i += 2 {
 		<-odd
 		fmt.Println(i)
-		if i == 10 {
-			close(even)
-			return
-		}
 		even <- true
 	}
 }
