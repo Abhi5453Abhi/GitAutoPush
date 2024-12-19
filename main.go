@@ -2,6 +2,22 @@ package main
 
 import "fmt"
 
+func PrintEven(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
+	for i := 0; i <= 10; i++ {
+		<-even
+		evenInt <- i
+		odd <- true
+	}
+}
+
+func PrintOdd(even chan bool, odd chan bool, evenInt chan int, oddInt chan bool) {
+	for i := 0; i <= 10; i++ {
+		<-odd
+		evenInt <- i
+		odd <- true
+	}
+}
+
 func main() {
 	even := make(chan bool)
 	odd := make(chan bool)
