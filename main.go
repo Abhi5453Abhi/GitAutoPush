@@ -1,8 +1,17 @@
 package main
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
-func PrintPing(ping chan bool, pong chan bool, wg *s)
+func PrintPing(ping chan bool, pong chan bool, wg *sync.WaitGroup) {
+	for i := 0; i <= 10; i += 2 {
+		<-ping
+		fmt.Println("ping")
+		pong <- true
+	}
+}
 
 func main() {
 	ping := make(chan bool)
