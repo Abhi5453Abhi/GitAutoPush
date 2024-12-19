@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-func PrintPing(ping chan bool, pong chan bool, done chan bool) {
+func PrintPing(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGroup) {
 	// defer wg.Done()
 	// for i := 0; i < 10; i++ {
 	// 	<-ping
@@ -20,7 +23,7 @@ func PrintPing(ping chan bool, pong chan bool, done chan bool) {
 	}
 }
 
-func PrintPong(ping chan bool, pong chan bool, done chan bool) {
+func PrintPong(ping chan bool, pong chan bool, done chan bool, wg *sync.WaitGroup) {
 	// defer wg.Done()
 	// for i := 0; i < 10; i++ {
 	// 	<-pong
@@ -39,22 +42,22 @@ func PrintPong(ping chan bool, pong chan bool, done chan bool) {
 }
 
 func main() {
-	// wg := sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 
 	ping := make(chan bool, 10)
 	pong := make(chan bool, 10)
 	done := make(chan bool)
 
-	// wg.Add(2)
-	go PrintPing(ping, pong, done)
-	go PrintPong(ping, pong, done)
+	wg.Add(2)
+	go PrintPing(ping, pong, done, &wg)
+	go PrintPong(ping, pong, done, &wg)
 	ping <- true
 
 	for i := 0; i <= 10; i++ {
 
 	}
 
-	// wg.Wait()
+	wg.Wait()
 	close(done)
 
 }
