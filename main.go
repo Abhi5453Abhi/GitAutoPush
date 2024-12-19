@@ -16,7 +16,7 @@ package main
 import "fmt"
 
 func main() {
-	str := " "
+	str := "a"
 	ans := 0
 
 	for i, ch := range str {
