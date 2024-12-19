@@ -47,9 +47,9 @@ func main() {
 
 	r.GET("/:id", func(ctx *gin.Context) {
 		id := ctx.Param("id")
-		newId, err := strconv.Atoi(id)
+		newId, _ := strconv.Atoi(id)
 		ctx.JSON(http.StatusAccepted, gin.H{
-			"id":      id,
+			"id":      newId,
 			"Message": "Successfull",
 		})
 	})
