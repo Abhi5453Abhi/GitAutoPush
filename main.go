@@ -40,11 +40,12 @@ func main() {
 		ch <- i
 	}
 
-	wg.Wait()
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
 	for i := range res {
 		fmt.Println(i)
 	}
-
-	close(ch)
 
 }
