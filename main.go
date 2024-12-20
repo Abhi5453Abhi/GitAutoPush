@@ -37,4 +37,5 @@ func main() {
 	for i := range ch {
 		go GetResult(i, res)
 	}
+
 }
