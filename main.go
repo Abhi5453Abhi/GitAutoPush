@@ -7,6 +7,7 @@ Worker pool pattern
 package main
 
 import (
+	"fmt"
 	"sync"
 )
 
@@ -16,7 +17,7 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 }
 
 func WorkerFunction(ch chan int, wg *sync.WaitGroup, res chan int) {
-	wg.Done()
+	defer wg.Done()
 	val := <-ch
 	res <- val * val
 }
@@ -31,6 +32,7 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	for i := 0; i <= 3; i++ {
+		wg.Add(1)
 		go WorkerFunction(ch, &wg, res)
 	}
 
@@ -39,7 +41,7 @@ func main() {
 	}
 
 	for i := range res {
-
+		fmt.Println(i)
 	}
 
 	close(ch)
