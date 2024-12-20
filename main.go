@@ -13,7 +13,7 @@ import (
 
 func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 	defer wg.Done()
-	ch <- val * val
+	ch <- val
 }
 
 func main() {
