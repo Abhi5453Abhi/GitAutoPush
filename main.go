@@ -40,6 +40,7 @@ func main() {
 		ch <- i
 	}
 
+	wg.Wait()
 	for i := range res {
 		fmt.Println(i)
 	}
