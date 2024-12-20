@@ -15,6 +15,10 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 	ch <- val
 }
 
+func WorkerFunction(val int) {
+
+}
+
 func GetResult(val int, result chan int) {
 	result <- val * val
 }
@@ -25,8 +29,7 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	for i := 0; i <= 100; i++ {
-		wg.Add(1)
-		go GetSquare(i, &wg, ch)
+		ch <- i
 	}
 
 	go func() {
@@ -35,7 +38,7 @@ func main() {
 	}()
 
 	for i := range ch {
-		go GetResult(i, res)
+		go WorkerFunction(i)
 	}
 
 }
