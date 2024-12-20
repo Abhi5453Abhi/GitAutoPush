@@ -43,7 +43,7 @@ func main() {
 		close(ch)
 	}()
 
-	for i := 0; i <= 3; i++ {
+	for i := 0; i <= 5; i++ {
 		wg.Add(1)
 		go WorkerFunction(ch, &wg, res)
 	}
