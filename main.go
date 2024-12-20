@@ -44,7 +44,7 @@ func main() {
 
 	go func() {
 		wg.Wait()
-		close(res)
+		// close(res)
 	}()
 	for i := range res {
 		fmt.Println(i)
