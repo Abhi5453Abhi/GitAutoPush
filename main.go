@@ -37,13 +37,13 @@ func main() {
 	wg := sync.WaitGroup{}
 
 	go func() {
-		for i := 0; i < 100; i++ {
+		for i := 0; i < 1000; i++ {
 			ch <- i
 		}
 		close(ch)
 	}()
 
-	for i := 0; i <= 2; i++ {
+	for i := 0; i <= 15; i++ {
 		wg.Add(1)
 		go WorkerFunction(ch, &wg, res)
 	}
