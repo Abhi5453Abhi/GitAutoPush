@@ -15,6 +15,10 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 	ch <- val
 }
 
+func GetResult(result chan int) {
+
+}
+
 func main() {
 	ch := make(chan int, 100)
 	res := make(chan int, 100)
@@ -31,6 +35,6 @@ func main() {
 	}()
 
 	for i := range ch {
-		go PrintRes
+		go GetResult(i, res)
 	}
 }
