@@ -17,7 +17,8 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 
 func WorkerFunction(ch chan int, wg *sync.WaitGroup, res chan int) {
 	wg.Done()
-	res
+	val := <-ch
+	res <- val * val
 }
 
 func GetResult(val int, result chan int) {
@@ -35,6 +36,10 @@ func main() {
 
 	for i := 0; i <= 100; i++ {
 		ch <- i
+	}
+
+	for i := range res {
+
 	}
 
 	close(ch)
