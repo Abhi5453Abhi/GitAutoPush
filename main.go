@@ -46,6 +46,7 @@ func main() {
 
 	go func() {
 		wg.Wait()
+		close(ch)
 		close(res)
 	}()
 	for i := range res {
