@@ -17,7 +17,7 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 }
 
 func main() {
-	ch := make(chan int, 10000)
+	ch := make(chan int, 100)
 	wg := sync.WaitGroup{}
 
 	for i := 0; i <= 100; i++ {
