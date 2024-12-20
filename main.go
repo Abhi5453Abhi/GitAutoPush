@@ -19,8 +19,10 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 
 func WorkerFunction(ch chan int, wg *sync.WaitGroup, res chan int) {
 	defer wg.Done() //execute once all the rest of things are done in this function
-	val := <-ch
-	res <- val * val
+	for i := range ch {
+		res <- i * i
+	}
+
 }
 
 func GetResult(val int, result chan int) {
