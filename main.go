@@ -20,12 +20,15 @@ func main() {
 	ch := make(chan int, 10000)
 	wg := sync.WaitGroup{}
 
-	for i := 0; i <= 10000; i++ {
+	for i := 0; i <= 100; i++ {
 		wg.Add(1)
 		go GetSquare(i, &wg, ch)
 	}
 
-	wg.Wait()
+	go func() {
+		wg.Wait()
+		close(ch)
+	}()
 
 	for i := range ch {
 		fmt.Println(i)
