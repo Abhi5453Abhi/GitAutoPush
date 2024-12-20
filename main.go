@@ -42,6 +42,8 @@ func main() {
 		go WorkerFunction(ch, &wg, res)
 	}
 
+	s
+
 	go func() {
 		wg.Wait()
 		close(res)
