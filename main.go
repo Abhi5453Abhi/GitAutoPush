@@ -31,11 +31,11 @@ func main() {
 	res := make(chan int)
 	wg := sync.WaitGroup{}
 
-	go func() {
-		for i := 0; i <= 100; i++ {
-			ch <- i
-		}
-	}()
+	// go func() {
+	for i := 0; i <= 100; i++ {
+		ch <- i
+	}
+	// }()
 
 	for i := 0; i <= 3; i++ {
 		wg.Add(1)
