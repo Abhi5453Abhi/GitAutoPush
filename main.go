@@ -9,7 +9,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
@@ -44,8 +43,6 @@ func main() {
 		wg.Add(1)
 		go WorkerFunction(ch, &wg, res)
 	}
-
-	time.Sleep(time.Second * 4)
 
 	go func() {
 		wg.Wait()
