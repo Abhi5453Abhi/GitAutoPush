@@ -36,9 +36,11 @@ func main() {
 		go WorkerFunction(ch, &wg, res)
 	}
 
-	for i := 0; i <= 100; i++ {
-		ch <- i
-	}
+	go func() {
+		for i := 0; i <= 100; i++ {
+			ch <- i
+		}
+	}()
 
 	go func() {
 		wg.Wait()
