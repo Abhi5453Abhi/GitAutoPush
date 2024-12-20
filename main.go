@@ -43,7 +43,7 @@ func main() {
 		go WorkerFunction(ch, &wg, res)
 	}
 
-	set.Timeout(time.Second * 4)
+	time.Sleep(time.Second * 4)
 
 	go func() {
 		wg.Wait()
