@@ -29,6 +29,7 @@ func GetResult(val int, result chan int) {
 func main() {
 	ch := make(chan int, 100)
 	res := make(chan int, 100)
+	done := make(chan bool)
 	wg := sync.WaitGroup{}
 
 	for i := 0; i <= 3; i++ {
@@ -46,6 +47,9 @@ func main() {
 		wg.Wait()
 		close(res)
 	}()
+	for {
+		s
+	}
 	for i := range res {
 		fmt.Println(i)
 	}
