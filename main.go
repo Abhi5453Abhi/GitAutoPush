@@ -9,6 +9,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
@@ -42,7 +43,7 @@ func main() {
 		go WorkerFunction(ch, &wg, res)
 	}
 
-	s
+	set.Timeout(time.Second * 4)
 
 	go func() {
 		wg.Wait()
