@@ -27,15 +27,15 @@ func GetResult(val int, result chan int) {
 }
 
 func main() {
-	ch := make(chan int)
-	res := make(chan int)
+	ch := make(chan int, 100)
+	res := make(chan int, 100)
 	wg := sync.WaitGroup{}
 
-	// go func() {
-	for i := 0; i <= 100; i++ {
-		ch <- i
-	}
-	// }()
+	go func() {
+		for i := 0; i <= 100; i++ {
+			ch <- i
+		}
+	}()
 
 	for i := 0; i <= 3; i++ {
 		wg.Add(1)
