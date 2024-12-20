@@ -15,7 +15,7 @@ func GetSquare(val int, wg *sync.WaitGroup, ch chan int) {
 	ch <- val
 }
 
-func WorkerFunction(val int) {
+func WorkerFunction(ch chan int, wg *sval int) {
 
 }
 
@@ -28,14 +28,15 @@ func main() {
 	res := make(chan int, 100)
 	wg := sync.WaitGroup{}
 
+	for i := 0 ; i <= 3 ; i++ {
+		go WorkerFunction(ch, &wg)
+	}
+
 	for i := 0; i <= 100; i++ {
 		ch <- i
 	}
 
-	go func() {
-		wg.Wait()
-		close(ch)
-	}()
+	close(ch)
 
 	for i := range ch {
 		go WorkerFunction(i)
